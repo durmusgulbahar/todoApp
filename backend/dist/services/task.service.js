@@ -42,7 +42,7 @@ class TaskService {
             return this.taskRepository.delete(id);
         });
     }
-    findyByStatus(status) {
+    findByStatus(status) {
         return __awaiter(this, void 0, void 0, function* () {
             return this.taskRepository.findByStatus(status);
         });

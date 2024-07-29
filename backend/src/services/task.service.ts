@@ -28,7 +28,7 @@ async delete(id: string): Promise<ITask | null> {
   return this.taskRepository.delete(id);
 }
 
-async findyByStatus(status:Status):Promise<ITask[] | null> {
+async findByStatus(status:Status):Promise<ITask[] | null> {
   return this.taskRepository.findByStatus(status);
 }
 }

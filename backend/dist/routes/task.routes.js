@@ -15,6 +15,9 @@ class TaskRoutes {
         //router fonksiyonunu 
         this.router.post("/", this.taskController.create.bind(this.taskController));
         this.router.get("/", this.taskController.findAll.bind(this.taskController));
+        this.router.put('/:id', this.taskController.update.bind(this.taskController));
+        this.router.delete('/:id', this.taskController.delete.bind(this.taskController));
+        this.router.post('/byStatus', this.taskController.findByStatus.bind(this.taskController));
     }
 }
 exports.default = new TaskRoutes().router;

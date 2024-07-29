@@ -40,5 +40,56 @@ class TaskController {
             }
         });
     }
+    findById(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const id = req.params.id;
+                const task = yield this.taskService.findById(id);
+                res.status(200).json(task);
+            }
+            catch (error) {
+                res.status(500).json({ error: error });
+            }
+        });
+    }
+    update(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const data = req.body;
+                const id = req.params.id;
+                const updatedUser = yield this.taskService.update(id, data);
+                if (!updatedUser) {
+                    res.status(404).json({ message: 'Task Not Found' });
+                }
+                res.status(200).json(updatedUser);
+            }
+            catch (error) {
+                res.status(500).json({ error: error });
+            }
+        });
+    }
+    delete(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const id = req.params.id;
+                yield this.taskService.delete(id);
+                res.status(200).json({ message: `Task(${id}) deleted` });
+            }
+            catch (error) {
+                res.status(500).json({ error: error });
+            }
+        });
+    }
+    findByStatus(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const data = req.body.status;
+                const tasks = yield this.taskService.findByStatus(data);
+                res.status(200).json({ tasks: tasks });
+            }
+            catch (error) {
+            }
+        });
+    }
 }
 exports.default = TaskController;
