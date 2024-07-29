@@ -15,6 +15,8 @@ class UserRoute {
     //router fonksiyonunu 
     this.router.post("/", this.userController.create.bind(this.userController));
     this.router.get("/", this.userController.findAll.bind(this.userController));
+    this.router.get("/:id",this.userController.findById.bind(this.userController));
+    this.router.put("/:id",this.userController.update.bind(this.userController))
   }
 }
 

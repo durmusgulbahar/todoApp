@@ -9,7 +9,6 @@ class UserController {
   constructor() {
     this.userService = new UserService();
   }
-
   async create(req: Request, res: Response) {
     try {
       const data: IUser = req.body;
@@ -24,6 +23,54 @@ class UserController {
     try {
       const users = await this.userService.findAll();
       res.status(200).json(users);
+    } catch (error) {
+      throw new Error(error as string);
+    }
+  }
+
+  //
+  async findById(req:Request, res:Response) {
+    try {
+      const data: string = req.params.id;
+      const user = await this.userService.findById(data);
+      res.status(200).json(user);
+    } catch (error) {
+      throw new Error(error as string);
+    }
+  }
+
+  async update(req:Request, res:Response){
+    try {
+      //id and user id must be same
+      const data:IUser = req.body;
+      const id : string = req.params.id;
+      const updatedUser = await this.userService.update(id, data);
+      if (!updatedUser) {
+        res.status(404).json({ message: 'User not found' });
+        return;
+      }
+      res.status(200).json(updatedUser);
+    } catch (error) {
+      res.status(500).json({error:error, message: 'Internal Server Error' });
+    }
+  }
+  async delete(req:Request, res:Response){
+    try {
+      
+    } catch (error) {
+      throw new Error(error as string);
+    }
+  }
+  async findByEmail(req:Request, res:Response){
+    try {
+      
+    } catch (error) {
+      throw new Error(error as string);
+    }
+  }
+  async findByName(req:Request, res:Response){
+    try {
+      
     } catch (error) {
       throw new Error(error as string);
     }

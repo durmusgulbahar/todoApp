@@ -40,5 +40,63 @@ class UserController {
             }
         });
     }
+    //
+    findById(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const data = req.params.id;
+                const user = yield this.userService.findById(data);
+                res.status(200).json(user);
+            }
+            catch (error) {
+                throw new Error(error);
+            }
+        });
+    }
+    update(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                //id and user id must be same
+                const data = req.body;
+                const id = req.params.id;
+                const updatedUser = yield this.userService.update(id, data);
+                if (!updatedUser) {
+                    res.status(404).json({ message: 'User not found' });
+                    return;
+                }
+                res.status(200).json(updatedUser);
+            }
+            catch (error) {
+                res.status(500).json({ error: error, message: 'Internal Server Error' });
+            }
+        });
+    }
+    delete(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+            }
+            catch (error) {
+                throw new Error(error);
+            }
+        });
+    }
+    findByEmail(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+            }
+            catch (error) {
+                throw new Error(error);
+            }
+        });
+    }
+    findByName(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+            }
+            catch (error) {
+                throw new Error(error);
+            }
+        });
+    }
 }
 exports.default = UserController;
