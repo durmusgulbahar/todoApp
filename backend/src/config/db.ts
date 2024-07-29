@@ -2,9 +2,9 @@ import mongoose from "mongoose";
 
 class Database {
   private readonly URI: string;
-
+  
   constructor() {
-    this.URI ="mongodb+srv://durmus:123@durmus.lqxdws2.mongodb.net/?retryWrites=true&w=majority&appName=durmus";
+    this.URI = process.env.MONGO_URI || 'default_value';
     this.connect();
   }
 
