@@ -74,8 +74,12 @@ class UserController {
     delete(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
+                const id = req.params.id;
+                yield this.userService.delete(id);
+                res.status(200).json({ message: "User deleted successfully!" });
             }
             catch (error) {
+                res.status(500).json({ error: error });
                 throw new Error(error);
             }
         });
@@ -83,17 +87,24 @@ class UserController {
     findByEmail(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
+                const email = req.body.email;
+                const user = yield this.userService.findByEmail(email);
+                res.status(200).json({ user });
             }
             catch (error) {
-                throw new Error(error);
+                res.status(500).json({ error: error });
             }
         });
     }
     findByName(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
+                const name = req.body.name;
+                const user = yield this.userService.findByName(name);
+                res.status(200).json({ user });
             }
             catch (error) {
+                res.status(500).json({ error: error });
                 throw new Error(error);
             }
         });

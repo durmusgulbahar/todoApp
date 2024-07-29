@@ -15,7 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = __importDefault(require("mongoose"));
 class Database {
     constructor() {
-        this.URI = "mongodb+srv://durmus:123@durmus.lqxdws2.mongodb.net/?retryWrites=true&w=majority&appName=durmus";
+        this.URI = process.env.MONGO_URI || 'default_value';
         this.connect();
     }
     connect() {

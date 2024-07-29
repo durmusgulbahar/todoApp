@@ -21,12 +21,12 @@ class UserRepository extends generic_repository_1.default {
     // create custom methods for user repository
     findByEmail(email) {
         return __awaiter(this, void 0, void 0, function* () {
-            return user_model_1.default.findOne({ email });
+            return user_model_1.default.findOne({ email: email });
         });
     }
     findByName(name) {
         return __awaiter(this, void 0, void 0, function* () {
-            return user_model_1.default.findOne({ name });
+            return user_model_1.default.findOne({ name: name });
         });
     }
 }

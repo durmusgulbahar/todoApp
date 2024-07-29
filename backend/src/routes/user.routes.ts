@@ -16,7 +16,12 @@ class UserRoute {
     this.router.post("/", this.userController.create.bind(this.userController));
     this.router.get("/", this.userController.findAll.bind(this.userController));
     this.router.get("/:id",this.userController.findById.bind(this.userController));
-    this.router.put("/:id",this.userController.update.bind(this.userController))
+    this.router.put("/:id",this.userController.update.bind(this.userController));
+    this.router.delete("/:id",this.userController.delete.bind(this.userController));
+    this.router.post("/findByEmail",this.userController.findByEmail.bind(this.userController));
+    this.router.post("/findByName",this.userController.findByName.bind(this.userController));
+
+
   }
 }
 

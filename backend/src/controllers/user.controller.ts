@@ -56,22 +56,34 @@ class UserController {
   }
   async delete(req:Request, res:Response){
     try {
-      
+
+      const id:string = req.params.id;
+      await this.userService.delete(id);
+      res.status(200).json({message:"User deleted successfully!"})
     } catch (error) {
+      res.status(500).json({error:error})
       throw new Error(error as string);
     }
   }
   async findByEmail(req:Request, res:Response){
     try {
-      
+        const email:string = req.body.email;
+        const user = await this.userService.findByEmail(email);
+        res.status(200).json({user});
+
     } catch (error) {
-      throw new Error(error as string);
+      res.status(500).json({error:error})
+     
     }
   }
   async findByName(req:Request, res:Response){
     try {
-      
+      const name:string = req.body.name;
+      const user = await this.userService.findByName(name);
+      res.status(200).json({user});
+
     } catch (error) {
+      res.status(500).json({error:error})
       throw new Error(error as string);
     }
   }

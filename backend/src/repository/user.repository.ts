@@ -9,11 +9,11 @@ class UserRepository extends GenericRepository<IUser> {
 
   // create custom methods for user repository
   async findByEmail(email: string): Promise<IUser | null> {
-    return User.findOne({ email });
+    return User.findOne({ email:email });
   }
 
   async findByName(name: string): Promise<IUser | null> {
-    return User.findOne({ name });
+    return User.findOne({ name:name });
   }
 }
 
