@@ -1,17 +1,21 @@
 import { Request, Response } from "express";
 import IUser from "../interfaces/IUser";
-
+import bcrypt from "bcryptjs"
 import UserService from "../services/user.service";
-
+import AuthMiddleware from "../middleware/auth";
+import jwt from "jsonwebtoken";
 class UserController {
   private readonly userService: UserService;
-
+  private readonly authMiddleware:AuthMiddleware;
   constructor() {
     this.userService = new UserService();
+    this.authMiddleware = new AuthMiddleware();
   }
   async create(req: Request, res: Response) {
     try {
       const data: IUser = req.body;
+      const hashedPw = await this.authMiddleware.getHash(data.password);  
+      data.password = hashedPw;
       const user = await this.userService.create(data);
       res.status(201).json(user);
     } catch (error: unknown) {
@@ -87,6 +91,8 @@ class UserController {
       throw new Error(error as string);
     }
   }
+
+  
 }
 
 export default UserController;

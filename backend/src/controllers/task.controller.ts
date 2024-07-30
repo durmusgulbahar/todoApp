@@ -12,7 +12,12 @@ class TaskController {
 
     async create(req:Request, res:Response){
         try {
+            if (!req.user || typeof req.user === 'string') {
+                return res.status(401).send({ message: 'User not authenticated' });
+              }
+            const userId :string = req.user._id;
             const data:ITask = req.body;
+            data.userId = userId;
             const task = await this.taskService.create(data);
             res.status(201).json(task);
         } catch (error) {

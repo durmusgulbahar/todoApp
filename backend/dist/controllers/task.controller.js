@@ -20,7 +20,12 @@ class TaskController {
     create(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
+                if (!req.user || typeof req.user === 'string') {
+                    return res.status(401).send({ message: 'User not authenticated' });
+                }
+                const userId = req.user._id;
                 const data = req.body;
+                data.userId = userId;
                 const task = yield this.taskService.create(data);
                 res.status(201).json(task);
             }

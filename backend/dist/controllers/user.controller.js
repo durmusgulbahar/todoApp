@@ -13,14 +13,18 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const user_service_1 = __importDefault(require("../services/user.service"));
+const auth_1 = __importDefault(require("../middleware/auth"));
 class UserController {
     constructor() {
         this.userService = new user_service_1.default();
+        this.authMiddleware = new auth_1.default();
     }
     create(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 const data = req.body;
+                const hashedPw = yield this.authMiddleware.getHash(data.password);
+                data.password = hashedPw;
                 const user = yield this.userService.create(data);
                 res.status(201).json(user);
             }

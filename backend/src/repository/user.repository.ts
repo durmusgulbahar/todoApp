@@ -15,6 +15,7 @@ class UserRepository extends GenericRepository<IUser> {
   async findByName(name: string): Promise<IUser | null> {
     return User.findOne({ name:name });
   }
+  
 }
 
 export default UserRepository;

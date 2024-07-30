@@ -6,6 +6,7 @@ import Database from "./config/db";
 import dotenv from "dotenv";
 import userRoutes from "./routes/user.routes";
 import taskRoutes from "./routes/task.routes";
+import authRoutes from "./routes/auth.routes";
 dotenv.config();
 class App {
   private readonly app: Application;
@@ -39,6 +40,7 @@ class App {
   private initRoutes() {
     this.app.use("/api/v1/tasks", taskRoutes);
     this.app.use("/api/v1/users", userRoutes);
+    this.app.use("/api/v1/auth", authRoutes);
   }
 
   private initErrorHandling() {

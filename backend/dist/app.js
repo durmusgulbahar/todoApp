@@ -11,6 +11,7 @@ const db_1 = __importDefault(require("./config/db"));
 const dotenv_1 = __importDefault(require("dotenv"));
 const user_routes_1 = __importDefault(require("./routes/user.routes"));
 const task_routes_1 = __importDefault(require("./routes/task.routes"));
+const auth_routes_1 = __importDefault(require("./routes/auth.routes"));
 dotenv_1.default.config();
 class App {
     constructor() {
@@ -37,6 +38,7 @@ class App {
     initRoutes() {
         this.app.use("/api/v1/tasks", task_routes_1.default);
         this.app.use("/api/v1/users", user_routes_1.default);
+        this.app.use("/api/v1/auth", auth_routes_1.default);
     }
     initErrorHandling() {
         this.app.use(error_handler_1.default.notFound);
