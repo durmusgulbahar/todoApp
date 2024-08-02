@@ -21,7 +21,7 @@ class AuthService {
     }
     register(user) {
         return __awaiter(this, void 0, void 0, function* () {
-            const hashedPassword = yield bcryptjs_1.default.hash(user.password, 16);
+            const hashedPassword = yield bcryptjs_1.default.hash(user.password, 10);
             user.password = hashedPassword;
             return yield this.userRepository.create(user);
         });

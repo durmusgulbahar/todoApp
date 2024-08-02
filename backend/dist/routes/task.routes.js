@@ -20,6 +20,7 @@ class TaskRoutes {
         this.router.put('/:id', this.taskController.update.bind(this.taskController));
         this.router.delete('/:id', this.taskController.delete.bind(this.taskController));
         this.router.post('/byStatus', this.taskController.findByStatus.bind(this.taskController));
+        this.router.get('/getTasks', this.authMiddleware.tokenValidation, this.taskController.findByUser.bind(this.taskController));
     }
 }
 exports.default = new TaskRoutes().router;

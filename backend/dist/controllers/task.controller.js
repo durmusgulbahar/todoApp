@@ -61,6 +61,9 @@ class TaskController {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 const data = req.body;
+                if (!(data.status === "To Do" || data.status === "Done")) {
+                    throw new Error("Status is not valid");
+                }
                 const id = req.params.id;
                 const updatedUser = yield this.taskService.update(id, data);
                 if (!updatedUser) {
@@ -90,9 +93,25 @@ class TaskController {
             try {
                 const data = req.body.status;
                 const tasks = yield this.taskService.findByStatus(data);
-                res.status(200).json({ tasks: tasks });
+                res.status(200).json({ tasks });
             }
             catch (error) {
+                res.status(500).json({ error: error });
+            }
+        });
+    }
+    findByUser(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                if (!req.user || typeof req.user === 'string') {
+                    return res.status(401).send({ message: 'User not authenticated' });
+                }
+                const userId = req.user._id;
+                const tasks = yield this.taskService.findByUser(userId);
+                res.status(200).json({ tasks });
+            }
+            catch (error) {
+                res.status(500).json({ error: error });
             }
         });
     }

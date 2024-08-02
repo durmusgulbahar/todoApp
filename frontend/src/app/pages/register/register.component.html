@@ -1,0 +1,18 @@
+<div class="register-container">
+    <h3>Register</h3>
+    @if(isLoading==false){
+      <form class="register-form" [formGroup]="registerForm" (ngSubmit)="register()" >
+        <input type="name" formControlName="name" placeholder="name" />
+        <input type="email" formControlName="email" placeholder="email" />
+        <input type="password" formControlName="password" placeholder="password" />
+        <button [disabled]="!registerForm.valid" type="submit">Submit</button>
+      </form>
+    }
+    @else {
+      <mat-spinner></mat-spinner>
+        <p>Registering...</p>
+    }
+   
+    <a routerLink="/">Sign In</a>
+  </div>
+  

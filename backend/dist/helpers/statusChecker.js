@@ -8,25 +8,12 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-const task_model_1 = __importDefault(require("../models/task.model"));
-const generic_repository_1 = __importDefault(require("./generic.repository"));
-class TaskRepository extends generic_repository_1.default {
-    constructor() {
-        super(task_model_1.default);
-    }
-    findByStatus(status) {
+class StatusChecker {
+    isValidStatus(status) {
         return __awaiter(this, void 0, void 0, function* () {
-            return task_model_1.default.find({ status }).exec();
-        });
-    }
-    findByUser(userId) {
-        return __awaiter(this, void 0, void 0, function* () {
-            return task_model_1.default.find({ userId }).exec();
+            return status == "To Do" || status == "Done";
         });
     }
 }
-exports.default = TaskRepository;
+exports.default = StatusChecker;

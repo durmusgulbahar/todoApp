@@ -1,8 +1,7 @@
 import { Request, Response } from "express";
 import ITask, { Status } from "../interfaces/ITask";
 import TaskService from "../services/task.service";
-import IUser from "../interfaces/IUser";
-
+import StatusChecker from "../helpers/statusChecker";
 class TaskController {
     private readonly taskService:TaskService;
 
@@ -46,7 +45,11 @@ class TaskController {
 
     async update(req:Request, res: Response){
        try {
+      
         const data: ITask = req.body;
+        if(!(data.status === "To Do" || data.status==="Done")){
+            throw new Error("Status is not valid");
+        }
         const id: string = req.params.id;
         const updatedUser = await this.taskService.update(id, data);
 
@@ -75,9 +78,24 @@ class TaskController {
         try {
             const data:Status = req.body.status;
             const tasks:ITask[] | null = await this.taskService.findByStatus(data);
-            res.status(200).json({tasks:tasks});
+            res.status(200).json({tasks});
         } catch (error) {
-            
+            res.status(500).json({error:error});
+
+        }
+    }
+
+    async findByUser(req:Request, res:Response){
+        try {
+            if (!req.user || typeof req.user === 'string') {
+                return res.status(401).send({ message: 'User not authenticated' });
+              }
+            const userId :string = req.user._id;
+            const tasks = await this.taskService.findByUser(userId);
+            res.status(200).json({tasks});
+        } catch (error) {
+            res.status(500).json({error:error});
+
         }
     }
 }

@@ -47,5 +47,10 @@ class TaskService {
             return this.taskRepository.findByStatus(status);
         });
     }
+    findByUser(userId) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return this.taskRepository.findByUser(userId);
+        });
+    }
 }
 exports.default = TaskService;

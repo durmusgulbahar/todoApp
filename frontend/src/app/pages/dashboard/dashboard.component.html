@@ -1,0 +1,33 @@
+<div>
+  <div>
+    <label for="description">
+      <input id="title" type="text" [(ngModel)]="title" placeholder="title"
+    /></label>
+
+    <label for="description">
+      <input
+        id="description"
+        [(ngModel)]="desription"
+        type="text"
+        placeholder="description"
+    /></label>
+
+    <button (click)="addTask()">Add Task</button>
+  </div>
+  <ul class="todoList">
+    @for (item of todos; track $index) {
+    <li [class]="cssClass(item.status)">
+      <input
+        type="checkbox"
+        [checked]="item.status === 'Done'"
+        (click)="editItem(item._id, item.status)"
+      />
+      <span>{{ item.title }}</span>
+      <p>{{ item.description }}</p>
+      <button (click)="deleteTask(item._id)">delete</button>
+    </li>
+    }
+  </ul>
+
+  <button (click)="logout()">Log out</button>
+</div>

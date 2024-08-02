@@ -13,6 +13,11 @@ class TaskRepository extends GenericRepository<ITask> {
         return Task.find({ status }).exec();
     }
 
+    async findByUser(userId: string):Promise<ITask[] | null> {
+        return Task.find({userId}).exec();
+    }
+
+    
 }
 
 export default TaskRepository;

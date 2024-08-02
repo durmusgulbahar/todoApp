@@ -1,0 +1,23 @@
+@if(token != ''){
+  <app-dashboard></app-dashboard>
+}
+@else {<div class="login-container">
+  <h3>Login</h3>
+  @if (!isLoading) {
+    <form class="login-form" [formGroup]="loginForm" (ngSubmit)="handleSubmit()">
+      <input type="email" formControlName="email" placeholder="email" />
+      <input type="password" formControlName="password" placeholder="password" />
+      <button type="submit">Submit</button>
+    </form>
+  }
+  @else {
+    <mat-spinner></mat-spinner>
+    <p>Logging in...</p>
+  }
+  <a routerLink="/register">Sign Up</a>
+
+
+
+  
+</div>
+}

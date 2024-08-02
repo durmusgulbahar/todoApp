@@ -31,5 +31,9 @@ async delete(id: string): Promise<ITask | null> {
 async findByStatus(status:Status):Promise<ITask[] | null> {
   return this.taskRepository.findByStatus(status);
 }
+
+async findByUser(userId:string):Promise<ITask[] | null> {
+  return this.taskRepository.findByUser(userId);
+}
 }
 export default TaskService;

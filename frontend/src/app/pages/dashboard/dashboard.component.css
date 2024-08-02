@@ -1,0 +1,19 @@
+.todoList{
+    margin-top: 20px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    list-style-type: none;
+}
+
+.list-item-done{
+    text-decoration: line-through;
+    color: #ccc;
+}
+
+
+p{
+    margin: 0;
+    color: gray;
+}
