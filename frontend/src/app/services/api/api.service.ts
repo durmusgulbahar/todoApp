@@ -14,7 +14,7 @@ export interface Todo {
   providedIn: 'root'
 })
 export class ApiService {
-  private baseUrl = 'http://localhost:4001/api/v1/tasks';
+  private baseUrl = 'https://todo-api.durmusgulbahar.dev/api/v1/tasks';
   constructor(private http: HttpClient) { }
 
   // Check if the user is logged in

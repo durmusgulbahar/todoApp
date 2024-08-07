@@ -12,7 +12,7 @@ interface User{
   providedIn: 'root'
 })
 export class AuthService {
-  private baseUrl = 'http://localhost:4001/api/v1/auth';
+  private baseUrl = 'https://todo-api.durmusgulbahar.dev/api/v1/auth';
   private isLoggedIn = new BehaviorSubject<boolean>(false);
   isLoggedIn$ = this.isLoggedIn.asObservable();   
   
